@@ -140,7 +140,7 @@ def main(args):
             if test < base:
                 best[opt] = val
 
-    print
+    print >> sys.stderr
     print '# Best configuration found'
     for k, v in sorted(best.iteritems()):
         print '%s: %s' % (k, v)
