@@ -71,18 +71,22 @@ def llvm():
 
     return opts
 
-def run(fn, opts):
-    style = ',\n'.join('%s: %s' % (k, v) for (k, v) in opts.iteritems())
+def run(fn, opts, verbose=None):
+
+    style = ',\n'.join('%s: %s' % (k, v) for (k, v) in sorted(opts.items()))
     args = ['clang-format', '-style={%s}' % style, fn]
+    if verbose:
+        print >> sys.stderr, ' '.join(args)
+
     proc = subprocess.Popen(args, stdout=subprocess.PIPE)
     ret = proc.wait()
     return proc.stdout.read()
 
-def filescore(fn, opts):
+def filescore(fn, opts, verbose=None):
 
     with open(fn) as f:
         old = f.read()
-    new = run(fn, opts)
+    new = run(fn, opts, verbose)
 
     res = 0
     for ln in difflib.unified_diff(old.splitlines(), new.splitlines()):
@@ -95,10 +99,10 @@ def filescore(fn, opts):
 
     return res
 
-def score(files, opts):
+def score(files, opts, verbose=None):
     res = 0
     for fn in files:
-        res += filescore(fn, opts)
+        res += filescore(fn, opts, verbose)
     return res
 
 def show_progress(rel):
@@ -109,6 +113,11 @@ def show_progress(rel):
     sys.stderr.flush()
 
 def main(args):
+
+    verbose = False
+    if '-v' in args:
+        args.remove('-v')
+        verbose = True
 
     if not args:
         print 'no files passed'
@@ -129,14 +138,16 @@ def main(args):
         for val in values:
 
             idx += 1
-            show_progress(idx / float(CASES))
+            if not verbose:
+                show_progress(idx / float(CASES))
+
             opts = copy.copy(best)
             if val is not None:
                 opts[opt] = val
             else:
                 opts.pop(opt, None)
 
-            test = score(args, opts)
+            test = score(args, opts, verbose)
             if test < base:
                 best[opt] = val
 
