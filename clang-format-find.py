@@ -27,27 +27,27 @@ BOOL_OPTS = {
 }
 
 ENUM_OPTS = {
-    'BreakBeforeBraces': {'Attach', 'Linux', 'Stroustrup', 'Allman'},
-    'NamespaceIndentation': {'None', 'Inner', 'All'},
-    'Standard': {'Cpp03', 'Cpp11', 'Auto'},
-    'UseTab': {'Never', 'ForIndentation', 'Always'},
+    'BreakBeforeBraces': ['Attach', 'Linux', 'Stroustrup', 'Allman'],
+    'NamespaceIndentation': ['None', 'Inner', 'All'],
+    'Standard': ['Cpp03', 'Cpp11', 'Auto'],
+    'UseTab': ['Never', 'ForIndentation', 'Always'],
 }
 
 INT_OPTS = {
-    'AccessModifierOffset': {-1, -2, -4},
-    'ColumnLimit': {0, 80, 100, 120},
-    'ConstructorInitializerIndentWidth': {4},
-    'ContinuationIndentWidth': {4},
-    'IndentWidth': {1, 2, 4, 8},
-    'MaxEmptyLinesToKeep': {1, 2},
-    'PenaltyBreakBeforeFirstCallParameter': {1, 19},
-    'PenaltyBreakComment': {60},
-    'PenaltyBreakFirstLessLess': {120},
-    'PenaltyBreakString': {1000},
-    'PenaltyExcessCharacter': {1000000},
-    'PenaltyReturnTypeOnItsOwnLine': {60, 200},
-    'SpacesBeforeTrailingComments': {1, 2},
-    'TabWidth': {2, 4, 8},
+    'AccessModifierOffset': [-1, -2, -4],
+    'ColumnLimit': [0, 80, 100, 120],
+    'ConstructorInitializerIndentWidth': [4],
+    'ContinuationIndentWidth': [4],
+    'IndentWidth': [1, 2, 4, 8],
+    'MaxEmptyLinesToKeep': [1, 2],
+    'PenaltyBreakBeforeFirstCallParameter': [1, 19],
+    'PenaltyBreakComment': [60],
+    'PenaltyBreakFirstLessLess': [120],
+    'PenaltyBreakString': [1000],
+    'PenaltyExcessCharacter': [1000000],
+    'PenaltyReturnTypeOnItsOwnLine': [60, 200],
+    'SpacesBeforeTrailingComments': [1, 2],
+    'TabWidth': [2, 4, 8],
 }
 
 ALL_OPTS = BOOL_OPTS | set(ENUM_OPTS) | set(INT_OPTS)
